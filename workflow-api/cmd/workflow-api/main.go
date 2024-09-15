@@ -5,11 +5,24 @@ import (
 
 	"github.com/YumDukFuu/workflow/internal/item"
 	"github.com/gin-gonic/gin"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 func main() {
+	// Connect database
+	db, err := gorm.Open(
+		postgres.Open(
+			"postgres://postgres:password@localhost:5432/task",
+		),
+	)
+	if err != nil {
+		log.Panic(err)
+	}
+
 	// Controller
-	controller := item.NewController()
+	controller := item.NewController(db)
+	// controller := item.NewController()
 
 	// Router
 	r := gin.Default()

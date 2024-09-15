@@ -6,6 +6,7 @@ import (
 
 	"github.com/YumDukFuu/workflow/internal/model"
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 type Controller struct {
@@ -14,11 +15,17 @@ type Controller struct {
 }
 
 // For Contract with main.go
-func NewController() Controller {
+func NewController(db *gorm.DB) Controller {
 	return Controller{
-		Service: NewService(),
+		Service: NewService(db),
 	}
 }
+
+// func NewController() Controller {
+// 	return Controller{
+// 		Service: NewService(),
+// 	}
+// }
 
 // Create item logic
 func (controller Controller) CreateItem(ctx *gin.Context) {

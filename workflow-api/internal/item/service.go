@@ -3,21 +3,22 @@ package item
 import (
 	"github.com/YumDukFuu/workflow/internal/constant"
 	"github.com/YumDukFuu/workflow/internal/model"
+	"gorm.io/gorm"
 )
 
 type Service struct {
-	// Repository Repository
+	Repository Repository
 }
 
-func NewService() Service {
-	return Service{}
-}
-
-// func NewService(db *gorm.DB) Service {
-// 	return Service{
-// 		Repository: NewRepository(db),
-// 	}
+// func NewService() Service {
+// 	return Service{}
 // }
+
+func NewService(db *gorm.DB) Service {
+	return Service{
+		Repository: NewRepository(db),
+	}
+}
 
 func (service Service) Create(req model.RequestItem) (model.Item, error) {
 	item := model.Item{
@@ -26,9 +27,9 @@ func (service Service) Create(req model.RequestItem) (model.Item, error) {
 		Quantity: req.Quantity,
 		Status:   constant.ItemPendingStatus,
 	}
-	// if err := service.Repository.Create(&item); err != nil {
-	// 	return model.Item{}, err
-	// }
+	if err := service.Repository.Create(&item); err != nil {
+		return model.Item{}, err
+	}
 	return item, nil
 }
 
