@@ -9,6 +9,12 @@ import (
 	"gorm.io/gorm"
 )
 
+// POST     /items
+// GET		/items?status=xxxxx
+// GET		/items/:id
+// PUT		/items/:id
+// PATCH    /items/:id
+// DELETE	/items/:id
 func main() {
 	// Connect database
 	db, err := gorm.Open(
@@ -27,8 +33,10 @@ func main() {
 	// Router
 	r := gin.Default()
 
-	// Register router
+	// 📝 Register router
 	r.POST("/items", controller.CreateItem)
+	// 🔎 Register router
+	r.GET("/items", controller.FindItems)
 
 	// Start server
 	if err := r.Run(); err != nil {

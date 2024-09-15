@@ -33,9 +33,9 @@ func (service Service) Create(req model.RequestItem) (model.Item, error) {
 	return item, nil
 }
 
-// func (service Service) Find(query model.RequestFindItem) ([]model.Item, error) {
-//     return service.Repository.Find(query)
-// }
+func (service Service) Find(query model.RequestFindItem) ([]model.Item, error) {
+	return service.Repository.Find(query)
+}
 
 // func (service Service) UpdateStatus(id uint, status constant.ItemStatus) (model.Item, error) {
 //     // Find item

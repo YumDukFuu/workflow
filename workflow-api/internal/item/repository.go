@@ -19,17 +19,17 @@ func (repo Repository) Create(item *model.Item) error {
 	return repo.Database.Create(item).Error
 }
 
-// func (repo Repository) Find(query model.RequestFindItem) ([]model.Item, error) {
-//     var results []model.Item
-//     db := repo.Database
-//     if statuses := query.Statuses; len(statuses) > 0 {
-//         db = db.Where("status IN ?", statuses)
-//     }
-//     if err := db.Find(&results).Error; err != nil {
-//         return results, err
-//     }
-//     return results, nil
-// }
+func (repo Repository) Find(query model.RequestFindItem) ([]model.Item, error) {
+	var results []model.Item
+	db := repo.Database
+	if statuses := query.Statuses; len(statuses) > 0 {
+		db = db.Where("status IN ?", statuses)
+	}
+	if err := db.Find(&results).Error; err != nil {
+		return results, err
+	}
+	return results, nil
+}
 
 // func (repo Repository) Replace(item model.Item) error {
 //     return repo.Database.Model(&item).Updates(item).Error

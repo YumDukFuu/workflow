@@ -65,3 +65,29 @@ func (controller Controller) CreateItem(ctx *gin.Context) {
 	})
 
 }
+
+//Find items
+
+func (controller Controller) FindItems(ctx *gin.Context) {
+	// Bind query parameters
+	var (
+		request model.RequestFindItem
+	)
+	if err := ctx.BindQuery(&request); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": err,
+		})
+		return
+	}
+	// Find
+	items, err := controller.Service.Find(request)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": err,
+		})
+		return
+	}
+	ctx.JSON(http.StatusOK, gin.H{
+		"data": items,
+	})
+}
