@@ -3,9 +3,10 @@ package model
 import "github.com/YumDukFuu/workflow/internal/constant"
 
 type RequestItem struct {
-	Title    string
-	Price    float64
-	Quantity uint
+	Title string
+	// Price    float64
+	// Quantity uint
+	Amount string
 }
 
 type RequestFindItem struct {

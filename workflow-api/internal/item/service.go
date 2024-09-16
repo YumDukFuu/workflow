@@ -22,10 +22,12 @@ func NewService(db *gorm.DB) Service {
 
 func (service Service) Create(req model.RequestItem) (model.Item, error) {
 	item := model.Item{
-		Title:    req.Title,
-		Price:    req.Price,
+		Title: req.Title,
+		// Price:    req.Price,
+		Amount:   req.Amount,
 		Quantity: req.Quantity,
 		Status:   constant.ItemPendingStatus,
+		Owner_id: req.Owner_id,
 	}
 	if err := service.Repository.Create(&item); err != nil {
 		return model.Item{}, err
