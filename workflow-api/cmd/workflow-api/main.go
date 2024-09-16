@@ -33,10 +33,12 @@ func main() {
 	// Router
 	r := gin.Default()
 
-	// 📝 Register router
+	// Register 📝 router
 	r.POST("/items", controller.CreateItem)
-	// 🔎 Register router
+	// Register 🔎 router
 	r.GET("/items", controller.FindItems)
+	// Register ✍️ router
+	r.PATCH("/items/:id", controller.UpdateItemStatus)
 
 	// Start server
 	if err := r.Run(); err != nil {
@@ -45,7 +47,7 @@ func main() {
 
 	// //3 2 1 Let Go
 	// fmt.Println("Hello, World!")
-	// //Sip the GIN
+	// //Siping GIN
 	// r := gin.Default()
 	// r.GET("/ping", func(c *gin.Context) {
 	// 	c.JSON(http.StatusOK, gin.H{

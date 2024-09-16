@@ -37,17 +37,17 @@ func (service Service) Find(query model.RequestFindItem) ([]model.Item, error) {
 	return service.Repository.Find(query)
 }
 
-// func (service Service) UpdateStatus(id uint, status constant.ItemStatus) (model.Item, error) {
-//     // Find item
-//     item, err := service.Repository.FindByID(id)
-//     if err != nil {
-//         return model.Item{}, err
-//     }
-//     // Fill data
-//     item.Status = status
-//     // Replace
-//     if err := service.Repository.Replace(item); err != nil {
-//         return model.Item{}, err
-//     }
-//     return item, nil
-// }
+func (service Service) UpdateStatus(id uint, status constant.ItemStatus) (model.Item, error) {
+	// Find item
+	item, err := service.Repository.FindByID(id)
+	if err != nil {
+		return model.Item{}, err
+	}
+	// Fill data
+	item.Status = status
+	// Replace
+	if err := service.Repository.Replace(item); err != nil {
+		return model.Item{}, err
+	}
+	return item, nil
+}

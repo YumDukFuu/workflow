@@ -13,6 +13,6 @@ type RequestFindItem struct {
 	// Statuses []constant.ItemStatus
 }
 
-// type RequestUpdateItem struct {
-// 	Status constant.ItemStatus
-// }
+type RequestUpdateItem struct {
+	Status constant.ItemStatus
+}

@@ -3,6 +3,7 @@ package item
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/YumDukFuu/workflow/internal/model"
 	"github.com/gin-gonic/gin"
@@ -89,5 +90,35 @@ func (controller Controller) FindItems(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusOK, gin.H{
 		"data": items,
+	})
+}
+
+// internal/item/controller.go
+
+func (controller Controller) UpdateItemStatus(ctx *gin.Context) {
+	// Bind
+	var (
+		request model.RequestUpdateItem
+	)
+	if err := ctx.Bind(&request); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": err,
+		})
+		return
+	}
+	// Path param
+	id, _ := strconv.ParseUint(ctx.Param("id"), 10, 64)
+	//  สามารถใช้ด้านล่างแทนได้ ถ้าไม่ต้องการแปลงเลขฐานสอง
+	//  id, _ := strconv.Atoi(ctx.Param("id"))
+	// Update status
+	item, err := controller.Service.UpdateStatus(uint(id), request.Status)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": err,
+		})
+		return
+	}
+	ctx.JSON(http.StatusOK, gin.H{
+		"data": item,
 	})
 }
