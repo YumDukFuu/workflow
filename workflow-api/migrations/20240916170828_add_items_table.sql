@@ -3,6 +3,10 @@ CREATE TABLE
     items (
         id bigserial NOT NULL,
         title text NOT NULL,
+        amount integer NOT NULL,
+        quantity integer NOT NULL,
+        status text NOT NULL,
+        owner_id integer NOT NULL,
         PRIMARY KEY (id)
     );
 -- +goose StatementBegin

@@ -6,7 +6,8 @@ type RequestItem struct {
 	Title string
 	// Price    float64
 	// Quantity uint
-	Amount string
+	Amount   uint
+	Quantity uint
 }
 
 type RequestFindItem struct {
