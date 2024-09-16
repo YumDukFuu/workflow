@@ -9,8 +9,8 @@ type RequestItem struct {
 }
 
 type RequestFindItem struct {
-	Statuses []constant.ItemStatus
-	// Statuses []constant.ItemStatus `form:"status[]"`
+	Statuses []constant.ItemStatus `form:"status[]"`
+	// Statuses []constant.ItemStatus
 }
 
 // type RequestUpdateItem struct {
