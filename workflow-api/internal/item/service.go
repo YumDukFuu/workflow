@@ -53,3 +53,21 @@ func (service Service) UpdateStatus(id uint, status constant.ItemStatus) (model.
 	}
 	return item, nil
 }
+
+// ////
+// func (service Service) EachID(id uint) uint {
+// func (service Service) EachID(id uint) (model.Item, error) {
+func (service Service) EachID(id uint, param model.RequestFindParam) (model.Item, error) {
+	// test := service.Repository.FindEach(id)
+	// fmt.Printf("%#v\n", param)
+	// test, err := service.Repository.FindEach(id)
+	test, err := service.Repository.FindEach(id, param)
+	if err != nil {
+		return model.Item{}, err
+	}
+	// return test
+	return test, nil
+	// 	ctx.JSON(http.StatusOK, gin.H{
+	// 		"data": id,
+	// 	})
+}

@@ -39,6 +39,17 @@ func main() {
 	r.GET("/items", controller.FindItems)
 	// Register ✍️ router
 	r.PATCH("/items/:id", controller.UpdateItemStatus)
+	// Register  router /items/:id?title=ขอเบิกสินค้า&amount=12&quantity=10
+	r.GET("/items/:id", controller.FindEachItem)
+
+	// r.GET("/items/:id", func(ctx *gin.Context) {
+	// 	// id := ctx.Param("id")
+	// 	id, _ := strconv.ParseUint(ctx.Param("id"), 10, 64)
+	// 	ctx.JSON(http.StatusOK, gin.H{
+	// 		"data": id,
+	// 	})
+	// 	// fmt.Printf("%#v\n", id)
+	// })
 
 	// Start server
 	if err := r.Run(); err != nil {

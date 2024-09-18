@@ -1,7 +1,6 @@
 package item
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -47,7 +46,7 @@ func (controller Controller) CreateItem(ctx *gin.Context) {
 	}
 
 	//Check value Request
-	fmt.Printf("%#v\n", request)
+	// fmt.Printf("%#v\n", request)
 	// model.RequestItem{Title:"", Price:0, Quantity:0x0}
 
 	// Create item
@@ -108,6 +107,7 @@ func (controller Controller) UpdateItemStatus(ctx *gin.Context) {
 	}
 	// Path param
 	id, _ := strconv.ParseUint(ctx.Param("id"), 10, 64)
+
 	//  สามารถใช้ด้านล่างแทนได้ ถ้าไม่ต้องการแปลงเลขฐานสอง
 	//  id, _ := strconv.Atoi(ctx.Param("id"))
 	// Update status
@@ -120,5 +120,49 @@ func (controller Controller) UpdateItemStatus(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusOK, gin.H{
 		"data": item,
+	})
+}
+
+// ///////////////
+func (controller Controller) FindEachItem(ctx *gin.Context) {
+
+	// Bind query parameters
+	var request model.RequestFindParam
+	if err := ctx.BindQuery(&request); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": err,
+		})
+		return
+	}
+	// fmt.Printf("%#v\n", request)
+	// 	// Find
+	// 	items, err := controller.Service.Find(request)
+	// 	if err != nil {
+	// 		ctx.JSON(http.StatusInternalServerError, gin.H{
+	// 			"message": err,
+	// 		})
+	// 		return
+	// 	}
+	// 	ctx.JSON(http.StatusOK, gin.H{
+	// 		"data": items,
+	// 	})
+
+	id, _ := strconv.ParseUint(ctx.Param("id"), 10, 64)
+	// var id uint
+	// id = 200
+	// item, err := controller.Service.EachID(uint(id))
+
+	item, err := controller.Service.EachID(uint(id), request)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": err,
+		})
+		return
+	}
+	// EachID(id)
+	ctx.JSON(http.StatusOK, gin.H{
+		// "data": id,
+		"data": item,
+		// 	"param": request,
 	})
 }
