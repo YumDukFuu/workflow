@@ -123,7 +123,7 @@ func (controller Controller) UpdateItemStatus(ctx *gin.Context) {
 	})
 }
 
-// ///////////////
+// 🗨📂///////////////
 func (controller Controller) FindEachItem(ctx *gin.Context) {
 
 	// Bind query parameters
@@ -164,5 +164,35 @@ func (controller Controller) FindEachItem(ctx *gin.Context) {
 		// "data": id,
 		"data": item,
 		// 	"param": request,
+	})
+}
+
+// 🗨✏️///////////////
+func (controller Controller) EditItem(ctx *gin.Context) {
+	id, _ := strconv.ParseUint(ctx.Param("id"), 10, 64)
+	var request model.RequestItem
+
+	if err := ctx.Bind(&request); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": err,
+		})
+		return
+	}
+	// var id uint
+	// id = 200
+	// item, err := controller.Service.EachID(uint(id))
+
+	item, err := controller.Service.EditItemByID(uint(id), request)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": err,
+		})
+		return
+	}
+	// EachID(id)
+	ctx.JSON(http.StatusOK, gin.H{
+		// "data":  id,
+		// "data2": request,
+		"data": item,
 	})
 }

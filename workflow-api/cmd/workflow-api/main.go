@@ -39,12 +39,18 @@ func main() {
 	r.GET("/items", controller.FindItems)
 	// Register ✍️ router
 	r.PATCH("/items/:id", controller.UpdateItemStatus)
-	// Register  router /items/:id?title=ขอเบิกสินค้า&amount=12&quantity=10
+	// Register 📂 router /items/:id?title=ขอเบิกสินค้า&amount=12&quantity=10
 	r.GET("/items/:id", controller.FindEachItem)
+	// Register ✏️ router
+	r.PUT("/items/:id", controller.EditItem)
+	// Register 🗑️ router
+	// r.DELETE("/items/:id", controller.DeleteItem)
 
-	// r.GET("/items/:id", func(ctx *gin.Context) {
+	///🚧///🚧///🚧///🚧///🚧///🚧///🚧///🚧///🚧///🚧///
+	// r.DELETE("/items/:id", func(ctx *gin.Context) {
 	// 	// id := ctx.Param("id")
-	// 	id, _ := strconv.ParseUint(ctx.Param("id"), 10, 64)
+	// 	id64, _ := strconv.ParseUint(ctx.Param("id"), 10, 64)
+	// 	id := uint(id64)
 	// 	ctx.JSON(http.StatusOK, gin.H{
 	// 		"data": id,
 	// 	})

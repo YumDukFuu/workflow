@@ -54,7 +54,7 @@ func (service Service) UpdateStatus(id uint, status constant.ItemStatus) (model.
 	return item, nil
 }
 
-// ////
+// 🗨📂///////////////
 // func (service Service) EachID(id uint) uint {
 // func (service Service) EachID(id uint) (model.Item, error) {
 func (service Service) EachID(id uint, param model.RequestFindParam) (model.Item, error) {
@@ -70,4 +70,31 @@ func (service Service) EachID(id uint, param model.RequestFindParam) (model.Item
 	// 	ctx.JSON(http.StatusOK, gin.H{
 	// 		"data": id,
 	// 	})
+}
+
+// 🗨✏️///////////////
+// func (service Service) EditItemByID(id uint, req model.RequestItem) {
+func (service Service) EditItemByID(id uint, req model.RequestItem) (model.Item, error) {
+
+	// fmt.Printf("EDIT-SERVICE ID %#v\n", id)
+	// fmt.Printf("EDIT-SERVICE REQ %#v\n", item)
+	// service.Repository.EditEach(id)
+	item, err := service.Repository.FindEachID(id)
+	if err != nil {
+		return model.Item{}, err
+	}
+	// fmt.Println("EDIT-Repo ITEM B4", item)
+
+	// Fill data
+	item.Amount = req.Amount
+	item.Quantity = req.Quantity
+
+	// fmt.Println("EDIT-Repo ITEM AFT", item)
+	// Sent to DB
+	if err := service.Repository.Replace(item); err != nil {
+		return model.Item{}, err
+	}
+
+	return item, nil
+
 }

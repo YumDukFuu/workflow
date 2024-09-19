@@ -19,9 +19,11 @@ type RequestUpdateItem struct {
 	Status constant.ItemStatus
 }
 
-// ////////////////////////////
+// 🗨📂///////////////
 type RequestFindParam struct {
 	Title    string `form:"title"`
 	Amount   uint   `form:"amount"`
 	Quantity uint   `form:"quantity"`
 }
+
+// 🗨✏️///////////////
