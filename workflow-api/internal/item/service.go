@@ -1,6 +1,8 @@
 package item
 
 import (
+	"fmt"
+
 	"github.com/YumDukFuu/workflow/internal/constant"
 	"github.com/YumDukFuu/workflow/internal/model"
 	"gorm.io/gorm"
@@ -97,4 +99,10 @@ func (service Service) EditItemByID(id uint, req model.RequestItem) (model.Item,
 
 	return item, nil
 
+}
+
+// 🗨🗑️ ///////////////
+func (service Service) DeleteItemByID(id uint) {
+	fmt.Println("IN SERVICE DELETE ID ", id)
+	service.Repository.DeleteFromDB(id)
 }

@@ -81,3 +81,11 @@ func (repo Repository) FindEachID(id uint) (model.Item, error) {
 	// fmt.Printf("IN REPO TEST %#v\n", result)
 	return result, nil
 }
+
+// 🗨🗑️ ///////////////
+func (repo Repository) DeleteFromDB(id uint) {
+	var result model.Item
+	db := repo.Database
+	// db = db.Unscoped().Delete(&result, id)
+	db.Unscoped().Delete(&result, id)
+}

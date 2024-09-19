@@ -196,3 +196,13 @@ func (controller Controller) EditItem(ctx *gin.Context) {
 		"data": item,
 	})
 }
+
+// 🗨🗑️ ///////////////
+func (controller Controller) DeleteItem(ctx *gin.Context) {
+	id, _ := strconv.ParseUint(ctx.Param("id"), 10, 64)
+	// ctx.JSON(http.StatusOK, gin.H{
+	// 	"data": id,
+	// })
+	controller.Service.DeleteItemByID(uint(id))
+
+}

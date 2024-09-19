@@ -44,7 +44,7 @@ func main() {
 	// Register ✏️ router
 	r.PUT("/items/:id", controller.EditItem)
 	// Register 🗑️ router
-	// r.DELETE("/items/:id", controller.DeleteItem)
+	r.DELETE("/items/:id", controller.DeleteItem)
 
 	///🚧///🚧///🚧///🚧///🚧///🚧///🚧///🚧///🚧///🚧///
 	// r.DELETE("/items/:id", func(ctx *gin.Context) {
