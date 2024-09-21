@@ -21,9 +21,9 @@ func (repo Repository) Create(item *model.Item) error {
 
 func (repo Repository) Find(query model.RequestFindItem) ([]model.Item, error) {
 	var results []model.Item
-	db := repo.Database
+	db := repo.Database.Order("id ASC")
 	if statuses := query.Statuses; len(statuses) > 0 {
-		db = db.Where("status IN ?", statuses).Order("id ASC")
+		db = db.Where("status IN ?", statuses)
 	}
 	if err := db.Find(&results).Error; err != nil {
 		return results, err
@@ -51,7 +51,7 @@ func (repo Repository) FindEach(id uint, param model.RequestFindParam) (model.It
 	// if err := repo.Database.First(&result, id).Error; err != nil {
 	// 	return result, err
 	// }
-	db := repo.Database
+	db := repo.Database.Order("id ASC")
 	// if statuses := query.Statuses; len(statuses) > 0 {
 	// 	db = db.Where("status IN ?", statuses)
 	// }
@@ -70,7 +70,7 @@ func (repo Repository) FindEachID(id uint) (model.Item, error) {
 	// if err := repo.Database.First(&result, id).Error; err != nil {
 	// 	return result, err
 	// }
-	db := repo.Database
+	db := repo.Database.Order("id ASC")
 	// if statuses := query.Statuses; len(statuses) > 0 {
 	// 	db = db.Where("status IN ?", statuses)
 	// }
@@ -85,7 +85,8 @@ func (repo Repository) FindEachID(id uint) (model.Item, error) {
 // 🗨🗑️ ///////////////
 func (repo Repository) DeleteFromDB(id uint) {
 	var result model.Item
-	db := repo.Database
+	db := repo.Database.Order("id ASC")
 	// db = db.Unscoped().Delete(&result, id)
 	db.Unscoped().Delete(&result, id)
+	// err
 }
